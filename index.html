@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aloa's Restaurant &amp; Beach Bar — Qeparo, Albania</title>
+<meta name="description" content="Aloa's Restaurant & Beach Bar — a relaxed beach bar and restaurant on the Albanian Riviera in Qeparo. Sun loungers, fresh Mediterranean food, seafood and the Ionian Sea." />
+<link rel="icon" href="assets/img/logo.jpeg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --sand: #f5efe4;
+    --navy: #15324c;       /* logo dark */
+    --green: #2f9e44;      /* logo green */
+    --green-d: #24803a;
+    --ink: #20221f;
+    --muted: #5f6660;
+    --maxw: 1180px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--ink);
+    background: var(--sand);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 600; line-height: 1.1; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+  /* language switch */
+  [data-en] { display: none; }
+  body.lang-en [data-sq] { display: none; }
+  body.lang-en [data-en] { display: inline; }
+  body.lang-en [data-en].block { display: block; }
+  [data-sq].block { display: block; }
+
+  /* logo badge */
+  .logo-badge { background: #fff; border-radius: 12px; padding: 8px 14px; display: inline-flex; box-shadow: 0 8px 24px -10px rgba(0,0,0,.35); }
+  .logo-badge img { height: 38px; width: auto; }
+
+  /* ---------- NAV ---------- */
+  header.nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 16px 28px; transition: background .3s ease, padding .3s ease;
+  }
+  header.nav.scrolled { background: rgba(21,50,76,.94); backdrop-filter: blur(8px); padding: 10px 28px; }
+  .nav-right { display: flex; align-items: center; gap: 22px; }
+  .nav-links { display: flex; gap: 22px; }
+  .nav-links a { color: #fff; text-decoration: none; font-size: .82rem; text-transform: uppercase; letter-spacing: 1.5px; opacity: .9; transition: opacity .2s; }
+  .nav-links a:hover { opacity: 1; }
+  .lang-toggle { display: inline-flex; border: 1px solid rgba(255,255,255,.5); border-radius: 999px; overflow: hidden; }
+  .lang-toggle button { background: transparent; color: #fff; border: 0; cursor: pointer; padding: 6px 12px; font-size: .72rem; font-weight: 600; letter-spacing: 1px; transition: background .2s, color .2s; }
+  .lang-toggle button.active { background: var(--green); color: #fff; }
+
+  /* ---------- HERO ---------- */
+  .hero { position: relative; min-height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; color: #fff; overflow: hidden; }
+  .hero video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+  .hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(21,50,76,.45) 0%, rgba(21,50,76,.25) 40%, rgba(21,50,76,.7) 100%); }
+  .hero-inner { padding: 0 24px; max-width: 760px; }
+  .hero .logo-badge { padding: 18px 26px; margin-bottom: 26px; }
+  .hero .logo-badge img { height: 96px; }
+  .hero .eyebrow { text-transform: uppercase; letter-spacing: 5px; font-size: .8rem; opacity: .92; margin-bottom: 14px; }
+  .hero p.tag { font-size: clamp(1.3rem, 3vw, 2rem); font-family: 'Cormorant Garamond', serif; opacity: .97; }
+  .hero .cta { margin-top: 30px; display: inline-flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+  .btn { display: inline-block; text-decoration: none; border-radius: 999px; padding: 13px 30px; font-size: .82rem; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; transition: transform .2s, background .2s, color .2s; cursor: pointer; }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary { background: var(--green); color: #fff; }
+  .btn-primary:hover { background: var(--green-d); }
+  .btn-ghost { border: 1px solid rgba(255,255,255,.7); color: #fff; }
+  .btn-ghost:hover { background: #fff; color: var(--navy); }
+  .scroll-hint { position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); color: #fff; opacity: .8; font-size: 1.5rem; animation: bob 2s infinite; }
+  @keyframes bob { 0%,100%{ transform: translateX(-50%) translateY(0);} 50%{ transform: translateX(-50%) translateY(8px);} }
+
+  /* ---------- SECTIONS ---------- */
+  section { padding: 96px 0; }
+  .section-label { text-transform: uppercase; letter-spacing: 3px; font-size: .78rem; color: var(--green); font-weight: 600; margin-bottom: 12px; }
+  h2.section-title { font-size: clamp(2.2rem, 5vw, 3.4rem); color: var(--navy); margin-bottom: 8px; }
+  .lead { font-size: 1.12rem; color: var(--muted); max-width: 620px; }
+
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .split img { border-radius: 14px; box-shadow: 0 24px 50px -24px rgba(21,50,76,.45); width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+  .split.reverse .txt { order: 2; }
+
+  /* ---------- FEATURES ---------- */
+  .features { background: #fff; }
+  .feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 48px; }
+  .feature { background: var(--sand); border-radius: 14px; padding: 34px 28px; text-align: center; transition: transform .25s ease, box-shadow .25s ease; }
+  .feature:hover { transform: translateY(-6px); box-shadow: 0 22px 40px -22px rgba(21,50,76,.4); }
+  .feature .ico { font-size: 2rem; margin-bottom: 14px; }
+  .feature h3 { font-size: 1.5rem; color: var(--navy); margin-bottom: 8px; }
+  .feature p { color: var(--muted); font-size: .98rem; }
+
+  /* ---------- MENU ---------- */
+  .menu { background: var(--sand); }
+  .menu-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px 56px; margin-top: 44px; }
+  .menu-cat h3 { font-size: 1.7rem; color: var(--navy); border-bottom: 2px solid var(--green); padding-bottom: 8px; margin-bottom: 14px; display: inline-block; }
+  .menu-item { display: flex; align-items: baseline; gap: 10px; padding: 7px 0; }
+  .menu-item .name { font-weight: 500; }
+  .menu-item .dots { flex: 1; border-bottom: 1px dotted #c9c2b4; transform: translateY(-4px); }
+  .menu-item .price { font-weight: 600; color: var(--green-d); white-space: nowrap; }
+  .menu-note { text-align: center; color: var(--muted); font-size: .9rem; margin-top: 30px; }
+  .menu-cta { text-align: center; margin-top: 22px; }
+  .btn-board { background: var(--navy); color: #fff; }
+  .btn-board:hover { background: #0e2235; }
+
+  /* ---------- GALLERY ---------- */
+  .gallery-grid { margin-top: 48px; display: grid; gap: 12px; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 200px; }
+  .gallery-grid a { overflow: hidden; border-radius: 10px; }
+  .gallery-grid img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+  .gallery-grid a:hover img { transform: scale(1.07); }
+  .g-tall { grid-row: span 2; }
+  .g-wide { grid-column: span 2; }
+
+  /* ---------- VISIT ---------- */
+  .visit { background: var(--navy); color: #fff; }
+  .visit h2.section-title { color: #fff; }
+  .visit .lead { color: rgba(255,255,255,.82); }
+  .visit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; margin-top: 16px; }
+  .info-list { list-style: none; margin-top: 28px; }
+  .info-list li { display: flex; gap: 16px; padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,.14); align-items: flex-start; }
+  .info-list .ico { color: var(--green); font-size: 1.2rem; min-width: 26px; }
+  .info-list strong { display: block; font-size: .76rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--green); margin-bottom: 2px; }
+  .info-list a { color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,.4); }
+  .info-list a:hover { border-color: var(--green); }
+  .map-embed { border-radius: 14px; overflow: hidden; box-shadow: 0 24px 50px -24px rgba(0,0,0,.6); min-height: 340px; }
+  .map-embed iframe { width: 100%; height: 100%; min-height: 340px; border: 0; display: block; }
+
+  /* ---------- FOOTER ---------- */
+  footer { background: #0e2235; color: rgba(255,255,255,.75); text-align: center; padding: 54px 24px; }
+  footer .logo-badge { margin-bottom: 18px; }
+  footer .socials { margin: 4px 0 14px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  footer .socials a { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; color: #fff; border: 1px solid rgba(255,255,255,.35); border-radius: 999px; padding: 9px 20px; font-size: .85rem; transition: background .2s, color .2s, border-color .2s; }
+  footer .socials a:hover { background: var(--green); color: #fff; border-color: var(--green); }
+  footer small { display: block; margin-top: 16px; opacity: .6; font-size: .8rem; }
+
+  /* ---------- MENU MODAL (lightbox) ---------- */
+  .modal { position: fixed; inset: 0; z-index: 100; display: none; align-items: center; justify-content: center; background: rgba(14,34,53,.85); backdrop-filter: blur(4px); padding: 28px; }
+  .modal.open { display: flex; }
+  .modal img { max-width: min(92vw, 660px); max-height: 90vh; border-radius: 12px; box-shadow: 0 30px 70px -20px rgba(0,0,0,.7); cursor: default; }
+  .modal .close { position: absolute; top: 18px; right: 22px; background: #fff; color: var(--navy); border: 0; width: 46px; height: 46px; border-radius: 50%; font-size: 1.6rem; line-height: 1; cursor: pointer; box-shadow: 0 8px 24px -8px rgba(0,0,0,.5); transition: background .2s, color .2s; }
+  .modal .close:hover { background: var(--green); color: #fff; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 860px) {
+    .nav-links { display: none; }
+    .split, .visit-grid, .menu-grid { grid-template-columns: 1fr; gap: 32px; }
+    .split.reverse .txt { order: 0; }
+    .feature-grid { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; }
+    .g-wide { grid-column: span 2; }
+    section { padding: 70px 0; }
+    .hero .logo-badge img { height: 70px; }
+  }
+</style>
+</head>
+<body class="lang-sq">
+
+  <!-- NAV -->
+  <header class="nav" id="nav">
+    <a href="#top" class="logo-badge" aria-label="Aloa's Restaurant & Beach Bar"><img src="assets/img/logo.jpeg" alt="Aloa's Restaurant & Beach Bar logo" /></a>
+    <div class="nav-right">
+      <nav class="nav-links">
+        <a href="#about"><span data-sq>Rreth nesh</span><span data-en>About</span></a>
+        <a href="#experience"><span data-sq>Përjetimi</span><span data-en>Experience</span></a>
+        <a href="#menu"><span data-sq>Menyja</span><span data-en>Menu</span></a>
+        <a href="#gallery"><span data-sq>Galeria</span><span data-en>Gallery</span></a>
+        <a href="#visit"><span data-sq>Na vizitoni</span><span data-en>Visit</span></a>
+      </nav>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button id="btn-sq" class="active" onclick="setLang('sq')">SQ</button>
+        <button id="btn-en" onclick="setLang('en')">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <video id="hero-video" autoplay muted loop playsinline poster="assets/img/hero-aerial.jpeg"></video>
+    <div class="hero-inner">
+      <span class="logo-badge"><img src="assets/img/logo.jpeg" alt="Aloa's Restaurant & Beach Bar" /></span>
+      <h1 class="visually-hidden">Aloa's Restaurant &amp; Beach Bar</h1>
+      <p class="eyebrow"><span data-sq>Qeparo · Riviera Shqiptare</span><span data-en>Qeparo · Albanian Riviera</span></p>
+      <p class="tag">
+        <span data-sq>Aty ku malet takohen me detin Jon.</span>
+        <span data-en>Where the mountains meet the Ionian Sea.</span>
+      </p>
+      <div class="cta">
+        <a href="#menu" class="btn btn-primary"><span data-sq>Shih menynë</span><span data-en>See the menu</span></a>
+        <a href="#visit" class="btn btn-ghost"><span data-sq>Na gjeni</span><span data-en>Find us</span></a>
+      </div>
+    </div>
+    <div class="scroll-hint">↓</div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="split">
+        <div class="txt">
+          <p class="section-label"><span data-sq>Rreth nesh</span><span data-en>About us</span></p>
+          <h2 class="section-title"><span data-sq>Mirë se vini në Aloa's</span><span data-en>Welcome to Aloa's</span></h2>
+          <p class="lead block" data-sq>
+            Pak hapa larg ujit, mes ullishtave dhe maleve të Qeparoit, Aloa's Restaurant &amp; Beach Bar është vendi ku dita rrjedh ngadalë.
+            Mëngjes nën hijen e ombrellave prej kashte, drekë me peshk të freskët dhe shije mesdhetare, dhe perëndime që ngjyrosin detin Jon —
+            këtu çdo i ftuar pritet si mik i shtëpisë.
+          </p>
+          <p class="lead block" data-en>
+            A few steps from the water, tucked between the olive groves and mountains of Qeparo, Aloa's Restaurant &amp; Beach Bar is where the day slows right down.
+            Mornings under the straw umbrellas, lunches of fresh-caught fish and Mediterranean flavours, and sunsets that set the Ionian Sea alight —
+            here, every guest is welcomed like family.
+          </p>
+        </div>
+        <img src="assets/img/entrance.jpeg" alt="Welcome to Aloa's — the host at the entrance" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE / FEATURES -->
+  <section class="features" id="experience">
+    <div class="wrap">
+      <p class="section-label" style="text-align:center"><span data-sq>Përjetimi</span><span data-en>The experience</span></p>
+      <h2 class="section-title" style="text-align:center"><span data-sq>Një ditë e përsosur buzë detit</span><span data-en>A perfect day by the sea</span></h2>
+      <div class="feature-grid">
+        <div class="feature">
+          <div class="ico">🏖️</div>
+          <h3><span data-sq>Shtretër dielli</span><span data-en>Sunbeds &amp; shade</span></h3>
+          <p>
+            <span data-sq>Rreshta shtretërish të rehatshëm dhe ombrella kashte mu mbi ujë — vendi juaj nën diell ju pret.</span>
+            <span data-en>Rows of comfortable sunbeds and straw parasols right on the shore — your spot in the sun is waiting.</span>
+          </p>
+        </div>
+        <div class="feature">
+          <div class="ico">🐟</div>
+          <h3><span data-sq>Kuzhinë &amp; peshk i freskët</span><span data-en>Kitchen &amp; fresh fish</span></h3>
+          <p>
+            <span data-sq>Mëngjese të bollshme, meze tradicionale, makarona dhe peshk e fruta deti të freskëta çdo ditë.</span>
+            <span data-en>Generous breakfasts, traditional meze, pasta and fresh fish &amp; seafood every day.</span>
+          </p>
+        </div>
+        <div class="feature">
+          <div class="ico">🍹</div>
+          <h3><span data-sq>Pije &amp; perëndime</span><span data-en>Drinks &amp; sunsets</span></h3>
+          <p>
+            <span data-sq>Kafe nën diell, kokteje të ftohta dhe perëndime që nuk harrohen mbi detin Jon.</span>
+            <span data-en>Coffee in the sun, cold cocktails and unforgettable sunsets over the Ionian Sea.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPLIT: BEACH -->
+  <section>
+    <div class="wrap">
+      <div class="split reverse">
+        <div class="txt">
+          <p class="section-label"><span data-sq>Plazhi</span><span data-en>The beach</span></p>
+          <h2 class="section-title"><span data-sq>Det i kthjellët, mal pas shpine</span><span data-en>Clear water, mountains behind</span></h2>
+          <p class="lead block" data-sq>
+            Plazhi i Qeparoit është ende i qetë dhe i pacenuar — zhavorr i bardhë, ujë kristal dhe ajër që mban erë ullinjsh.
+            Lëreni qytetin pas dhe zhytuni në ritmin e ngadaltë të Rivierës Shqiptare.
+          </p>
+          <p class="lead block" data-en>
+            Qeparo's beach is still calm and unspoilt — white pebbles, crystal water and air scented with olive trees.
+            Leave the city behind and sink into the slow rhythm of the Albanian Riviera.
+          </p>
+        </div>
+        <img src="assets/img/umbrella-turquoise.jpeg" alt="Straw umbrella and sunbeds over turquoise water" loading="lazy" />
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU -->
+  <section class="menu" id="menu">
+    <div class="wrap">
+      <p class="section-label" style="text-align:center"><span data-sq>Menyja</span><span data-en>The menu</span></p>
+      <h2 class="section-title" style="text-align:center"><span data-sq>Disa nga shijet tona</span><span data-en>A taste of our menu</span></h2>
+      <div class="menu-grid">
+
+        <div class="menu-cat">
+          <h3><span data-sq>Mëngjes</span><span data-en>Breakfast</span></h3>
+          <div class="menu-item"><span class="name"><span data-sq>Omëletë (djathë, domate)</span><span data-en>Omelette (cheese, tomato)</span></span><span class="dots"></span><span class="price">400 L · €4</span></div>
+          <div class="menu-item"><span class="name"><span data-sq>Toast me avokado</span><span data-en>Avocado toast</span></span><span class="dots"></span><span class="price">500 L · €5</span></div>
+          <div class="menu-item"><span class="name"><span data-sq>Petulla (djathë &amp; mjaltë)</span><span data-en>Petulla (cheese &amp; honey)</span></span><span class="dots"></span><span class="price">500 L · €5</span></div>
+          <div class="menu-item"><span class="name"><span data-sq>Kos me mjaltë &amp; fruta</span><span data-en>Yogurt, honey &amp; fruit</span></span><span class="dots"></span><span class="price">500 L · €5</span></div>
+          <div class="menu-item"><span class="name"><span data-sq>Petulla amerikane</span><span data-en>Pancakes</span></span><span class="dots"></span><span class="price">500 L · €5</span></div>
+        </div>
+
+        <div class="menu-cat">
+          <h3><span data-sq>Nga deti</span><span data-en>From the sea</span></h3>
+          <div class="menu-item"><span class="name"><span data-sq>Levrek në skarë</span><span data-en>Grilled seabass</span></span><span class="dots"></span><span class="price">1050 L · €10.50</span></div>
+          <div class="menu-item"><span class="name"><span data-sq>Koce në skarë</span><span data-en>Grilled sea bream</span></span><span class="dots"></span><span class="price">1050 L · €10.50</span></div>
+          <div class="menu-item"><span class="name"><span data-sq>Oktapod në skarë</span><span data-en>Grilled octopus</span></span><span class="dots"></span><span class="price">1450 L · €14.50</span></div>
+          <div class="menu-item"><span class="name"><span data-sq>Karkaleca në skarë</span><span data-en>Grilled shrimp</span></span><span class="dots"></span><span class="price">1200 L · €12</span></div>
+          <div class="menu-item"><span class="name"><span data-sq>Midhje në salcë vere</span><span data-en>Mussels in wine sauce</span></span><span class="dots"></span><span class="price">700 L · €7</span></div>
+        </div>
+
+        <div class="menu-cat">
+          <h3><span data-sq>Mish</span><span data-en>Meat</span></h3>
+          <div class="menu-item"><span class="name"><span data-sq>Filetë pule me patate</span><span data-en>Chicken fillet with fries</span></span><span class="dots"></span><span class="price">900 L · €9</span></div>
+          <div class="menu-item"><span class="name"><span data-sq>Biftek viçi me patate</span><span data-en>Beef steak with fries</span></span><span class="dots"></span><span class="price">1220 L · €12.20</span></div>
+          <div class="menu-item"><span class="name"><span data-sq>Souvlaki (pulë / derri)</span><span data-en>Souvlaki (chicken / pork)</span></span><span class="dots"></span><span class="price">550 L · €5.50</span></div>
+          <div class="menu-item"><span class="name"><span data-sq>Mish qengji në furrë</span><span data-en>Oven-baked lamb</span></span><span class="dots"></span><span class="price">1350 L · €13.50</span></div>
+        </div>
+
+        <div class="menu-cat">
+          <h3><span data-sq>Makarona</span><span data-en>Pasta</span></h3>
+          <div class="menu-item"><span class="name"><span data-sq>Linguine me fruta deti</span><span data-en>Linguine with seafood</span></span><span class="dots"></span><span class="price">1000 L · €10</span></div>
+          <div class="menu-item"><span class="name">Carbonara</span><span class="dots"></span><span class="price">850 L · €8.50</span></div>
+          <div class="menu-item"><span class="name"><span data-sq>Penne me 4 djathëra</span><span data-en>Penne 4 cheeses</span></span><span class="dots"></span><span class="price">800 L · €8</span></div>
+        </div>
+
+        <div class="menu-cat">
+          <h3><span data-sq>Sallata &amp; meze</span><span data-en>Salads &amp; starters</span></h3>
+          <div class="menu-item"><span class="name"><span data-sq>Sallatë greke</span><span data-en>Greek salad</span></span><span class="dots"></span><span class="price">500 L · €5</span></div>
+          <div class="menu-item"><span class="name"><span data-sq>Sallata Aloa's</span><span data-en>Aloa's salad</span></span><span class="dots"></span><span class="price">800 L · €8</span></div>
+          <div class="menu-item"><span class="name">Tzatziki</span><span class="dots"></span><span class="price">300 L · €3</span></div>
+          <div class="menu-item"><span class="name"><span data-sq>Djathë i skuqur me mjaltë</span><span data-en>Fried cheese with honey</span></span><span class="dots"></span><span class="price">600 L · €6</span></div>
+          <div class="menu-item"><span class="name"><span data-sq>Perime në skarë</span><span data-en>Grilled vegetables</span></span><span class="dots"></span><span class="price">500 L · €5</span></div>
+        </div>
+
+        <div class="menu-cat">
+          <h3><span data-sq>Pije</span><span data-en>Drinks</span></h3>
+          <div class="menu-item"><span class="name">Espresso</span><span class="dots"></span><span class="price">100 L · €1</span></div>
+          <div class="menu-item"><span class="name">Freddo espresso</span><span class="dots"></span><span class="price">250 L · €2.50</span></div>
+          <div class="menu-item"><span class="name"><span data-sq>Koktej</span><span data-en>Cocktails</span></span><span class="dots"></span><span class="price">900 L · €9</span></div>
+          <div class="menu-item"><span class="name"><span data-sq>Birrë (nga)</span><span data-en>Beer (from)</span></span><span class="dots"></span><span class="price">250 L · €2.50</span></div>
+          <div class="menu-item"><span class="name"><span data-sq>Verë, e kuqe / e bardhë</span><span data-en>Wine, red / white</span></span><span class="dots"></span><span class="price">600 L · €6</span></div>
+        </div>
+
+      </div>
+      <p class="menu-note">
+        <span data-sq>Çmimet në Lekë; Euro përafërsisht (≈100 Lekë = €1). Menyja e plotë në tabelë — peshku i ditës sipas peshës.</span>
+        <span data-en>Prices in Albanian Lekë; Euro approximate (≈100 Lekë = €1). Full menu on the board — fresh fish of the day priced by weight.</span>
+      </p>
+      <div class="menu-cta">
+        <button type="button" class="btn btn-board" onclick="openMenu()">
+          <span data-sq>Shih menynë e plotë</span><span data-en>View the full menu</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="gallery" style="background:#fff;">
+    <div class="wrap">
+      <p class="section-label" style="text-align:center"><span data-sq>Galeria</span><span data-en>Gallery</span></p>
+      <h2 class="section-title" style="text-align:center"><span data-sq>Një vështrim nga Aloa's</span><span data-en>A glimpse of Aloa's</span></h2>
+      <div class="gallery-grid">
+        <a href="assets/img/stringlights.jpeg" target="_blank" class="g-wide g-tall"><img src="assets/img/stringlights.jpeg" alt="Sunbeds under string lights and an olive tree" loading="lazy" /></a>
+        <a href="assets/img/umbrella-view.jpeg" target="_blank"><img src="assets/img/umbrella-view.jpeg" alt="Sea view from under a parasol" loading="lazy" /></a>
+        <a href="assets/img/bar-interior.jpeg" target="_blank"><img src="assets/img/bar-interior.jpeg" alt="Behind the bar at Aloa's" loading="lazy" /></a>
+        <a href="assets/img/umbrella-turquoise.jpeg" target="_blank" class="g-tall"><img src="assets/img/umbrella-turquoise.jpeg" alt="Straw umbrella over turquoise water" loading="lazy" /></a>
+        <a href="assets/img/hero-aerial.jpeg" target="_blank"><img src="assets/img/hero-aerial.jpeg" alt="Aerial view of Aloa's Beach Bar" loading="lazy" /></a>
+        <a href="assets/img/loungers-ground.jpeg" target="_blank"><img src="assets/img/loungers-ground.jpeg" alt="Sunbeds along the shore" loading="lazy" /></a>
+        <a href="assets/img/flowers.jpeg" target="_blank" class="g-wide"><img src="assets/img/flowers.jpeg" alt="Oleander flowers along the seafront promenade" loading="lazy" /></a>
+        <a href="assets/img/host-food.jpeg" target="_blank"><img src="assets/img/host-food.jpeg" alt="Fresh plates served at the bar" loading="lazy" /></a>
+        <a href="assets/img/bay-panorama.jpeg" target="_blank"><img src="assets/img/bay-panorama.jpeg" alt="Panorama of the bay" loading="lazy" /></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT -->
+  <section class="visit" id="visit">
+    <div class="wrap">
+      <div class="visit-grid">
+        <div class="txt">
+          <p class="section-label" style="color:var(--green)"><span data-sq>Na vizitoni</span><span data-en>Visit us</span></p>
+          <h2 class="section-title"><span data-sq>Ju presim te Aloa's</span><span data-en>We'll see you at Aloa's</span></h2>
+          <p class="lead block" data-sq>Na gjeni në plazhin e Qeparoit, në zemër të Rivierës Shqiptare. Ejani për mëngjes, drekë me peshk apo një koktej në perëndim — gjithmonë ka vend për një mik tjetër.</p>
+          <p class="lead block" data-en>Find us on Qeparo beach, in the heart of the Albanian Riviera. Come for breakfast, a seafood lunch or a sunset cocktail — there's always room for one more friend.</p>
+          <ul class="info-list">
+            <li>
+              <span class="ico">📍</span>
+              <div>
+                <strong><span data-sq>Vendndodhja</span><span data-en>Location</span></strong>
+                <span data-sq>Plazhi i Qeparoit, Himarë, Shqipëri</span><span data-en>Qeparo Beach, Himarë, Albania</span>
+              </div>
+            </li>
+            <li>
+              <span class="ico">📞</span>
+              <div>
+                <strong><span data-sq>Telefon &amp; rezervime</span><span data-en>Phone &amp; reservations</span></strong>
+                <a href="tel:+355693311961">069 33 11 961</a>
+              </div>
+            </li>
+            <li>
+              <span class="ico">🕘</span>
+              <div>
+                <strong><span data-sq>Orari</span><span data-en>Open</span></strong>
+                <span data-sq>Çdo ditë gjatë sezonit · 09:00 deri vonë</span><span data-en>Daily in season · 9:00 until late</span>
+              </div>
+            </li>
+            <li>
+              <span class="ico">📷</span>
+              <div>
+                <strong>Instagram</strong>
+                <a href="https://www.instagram.com/aloasbeachqeparo/" target="_blank" rel="noopener">@aloasbeachqeparo</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="map-embed">
+          <iframe
+            title="Aloa's Beach Bar location"
+            src="https://www.google.com/maps?q=Aloa%27s+Beach+Bar%2C+Qeparo%2C+Albania&z=15&output=embed"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU MODAL -->
+  <div class="modal" id="menu-modal" onclick="closeMenu()">
+    <button type="button" class="close" aria-label="Close" onclick="closeMenu()">&times;</button>
+    <img src="assets/img/menu-board.jpeg" alt="Aloa's full menu board" onclick="event.stopPropagation()" />
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="logo-badge"><img src="assets/img/logo.jpeg" alt="Aloa's Restaurant & Beach Bar" /></span>
+    <div class="socials">
+      <a href="tel:+355693311961">📞 069 33 11 961</a>
+      <a href="https://www.instagram.com/aloasbeachqeparo/" target="_blank" rel="noopener">📷 @aloasbeachqeparo</a>
+    </div>
+    <p>
+      <span data-sq>Qeparo · Riviera Shqiptare · Det, diell &amp; mikpritje</span>
+      <span data-en>Qeparo · Albanian Riviera · Sea, sun &amp; hospitality</span>
+    </p>
+    <small>© <span id="year">2026</span> Aloa's Restaurant &amp; Beach Bar</small>
+  </footer>
+
+  <script>
+    // language
+    function setLang(lang) {
+      document.body.classList.toggle('lang-en', lang === 'en');
+      document.body.classList.toggle('lang-sq', lang === 'sq');
+      document.documentElement.lang = lang;
+      document.getElementById('btn-sq').classList.toggle('active', lang === 'sq');
+      document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    }
+
+    // responsive hero video: load only the orientation that fits the device
+    (function () {
+      var v = document.getElementById('hero-video');
+      var isMobile = window.matchMedia('(max-width: 768px)').matches;
+      var src = isMobile ? 'assets/video/hero-mobile.mp4' : 'assets/video/hero-desktop.mp4';
+      var s = document.createElement('source');
+      s.src = src; s.type = 'video/mp4';
+      v.appendChild(s);
+      v.load();
+      var play = v.play(); if (play && play.catch) play.catch(function(){});
+    })();
+
+    // full-menu lightbox
+    var menuModal = document.getElementById('menu-modal');
+    function openMenu() { menuModal.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    function closeMenu() { menuModal.classList.remove('open'); document.body.style.overflow = ''; }
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
+
+    // always show the current year in the footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // sticky nav background on scroll
+    var nav = document.getElementById('nav');
+    var onScroll = function () { nav.classList.toggle('scrolled', window.scrollY > 40); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  </script>
+</body>
+</html>
