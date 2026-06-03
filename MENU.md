@@ -1,46 +1,124 @@
 # Aloa's Restaurant & Beach Bar — Menu
 
-Source of truth: the Google Business listing. No prices (per owner's instruction).
-Sections below are taken from the Google listing menu. **Dish items still to be added** —
-paste the item lists from the Google listing and they'll be filled in under each section.
+Source of truth: the Google Business listing. Item names only — no prices (per owner's instruction).
 
 ---
 
 ## Breakfast — Mëngjes
-_(items to be added)_
+- Omlette (cheese, tomato)
+- Omlette (cheese, tomato, bacon)
+- Avocado toast
+- Fried egg
+- Petulla
+- Petulla (cheese, honey)
+- Yogurt (honey, fruits)
+- Toast
+- Club sandwich
+- Pancake
+- Fruit salad
 
 ## Appetizers — Meze
-_(items to be added)_
+- Tzatziki
+- Grilled vegetables
+- French fries
+- 5 sauces
+- Anchovies
+- Fried cheese with honey
+- Goat cheese
+- Zucchini balls with tzatziki
+- Fried zucchini (with garlic sauce)
 
 ## Meat — Mish
-_(items to be added)_
+- Chicken filet (with fries)
+- Beef steak (with fries)
+- Pork steak (with fries)
+- Mix meat (2 portions)
+- Mix meat (4 portions)
+- Beef meatballs (with fries)
+- Oven-baked lamb
+- Souvlaki chicken / pork (with fries)
 
 ## Pasta — Makarona
-_(items to be added)_
+- Linguini seafood
+- Linguini shrimp
+- Carbonara
+- Penne, tomato sauce
+- Penne, 4 cheeses
 
 ## Fish — Peshk
-_(items to be added)_
+- Grilled seabass
+- Dorada grilled
+- Grilled octopus
+- Grilled shrimp
+- Grilled squid
+- Fried barbun
+- Fried goatfish
+- Mix grilled seafood (2–3 portions)
+- Mussels in wine sauce
+- Fried squid
+- Cheese stuffed squid
+- Wild seabass (100 g)
+- Grilled dorada (100 g)
+- Dental (100 g)
+- Sargo (100 g)
 
 ## Soup — Supa
-_(items to be added)_
+- Fish soup
+- Vegetable soup
+- Chicken soup
 
 ## Drinks — Pije
-_(items to be added)_
+- Espresso
+- Freddo espresso
+- Orange juice
+- Smoothie
+- Milkshake
+- Mix juice
+- Mocktails
+- Cocktails
 
 ## Salads — Sallata
-_(items to be added)_
+- Greek salad
+- Roka (rocket) salad
+- Beetroot salad
+- Olives
+- Caesar salad
+- Green salad
+- Aloa's salad
 
 ## Beers — Birra
-_(items to be added)_
+- Small draft beer
+- Big draft beer
+- Paulaner
+- Corona
+- Tirana
+- Korça
+- Peja
+- Peroni
+- Non-alcoholic beer
 
 ## Wines — Verëra
-_(items to be added)_
+- Half a litre (red / white)
 
 ## Seafood — Fruta deti
-_(items to be added)_
+- Dorada grilled
+- Grilled shrimp
+- Grilled octopus
+- Grilled squid
+- Fried barbun
+- Fried goatfish
+- Mix grilled seafood (2–3 portions)
+- Mussels in wine sauce
+- Fried squid
+- Cheese stuffed squid
+- Wild seabass (100 g)
+- Grilled dorada (100 g)
+- Dental (100 g)
+- Sargo (100 g)
 
 ## Cocktails — Kokteje
-_(items to be added)_
+- Cocktails
 
 ## Others — Të tjera
-_(items to be added)_
+- 1 umbrella and 2 sunbeds
+- 1 umbrella
