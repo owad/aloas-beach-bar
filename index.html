@@ -110,6 +110,7 @@
   .menu-cta { text-align: center; margin-top: 22px; }
   .btn-board { background: var(--navy); color: #fff; }
   .btn-board:hover { background: #0e2235; }
+  .menu-loading { text-align: center; color: var(--muted); padding: 24px 0; }
 
   /* ---------- GALLERY ---------- */
   .gallery-grid { margin-top: 48px; display: grid; gap: 12px; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 200px; }
@@ -283,15 +284,18 @@
     <div class="wrap">
       <p class="section-label" style="text-align:center"><span data-sq>Menyja</span><span data-en>The menu</span></p>
       <h2 class="section-title" style="text-align:center"><span data-sq>Menyja jonë</span><span data-en>Our menu</span></h2>
-      <p class="lead" style="max-width:640px;margin:0 auto 26px;text-align:center">
-        <span data-sq>Mëngjese të freskëta, peshk i ditës, makarona, mish në skarë, sallata mesdhetare dhe kokteje buzë detit — të gjitha buzë detit Jon. Menyja jonë e plotë dhe gjithmonë e përditësuar gjendet në Google.</span>
-        <span data-en>Fresh breakfasts, fish of the day, pasta, grilled meats, Mediterranean salads and cocktails — all by the Ionian Sea. Our full, always-up-to-date menu lives on Google.</span>
+      <p class="lead" style="max-width:640px;margin:0 auto 36px;text-align:center">
+        <span data-sq>Mëngjese të freskëta, peshk i ditës, mish në skarë, sallata mesdhetare dhe kokteje — buzë detit Jon.</span>
+        <span data-en>Fresh breakfasts, fish of the day, grilled meats, Mediterranean salads and cocktails — by the Ionian Sea.</span>
       </p>
-      <div class="menu-cta">
-        <a class="btn btn-primary" href="https://share.google/1H0qTNSMTV8mdkK0m" target="_blank" rel="noopener">
-          <span data-sq>Shihni menynë tonë në Google</span><span data-en>View our menu on Google</span>
-        </a>
+      <div id="menu-live" aria-live="polite">
+        <p class="menu-loading"><span data-sq>Po ngarkohet menyja…</span><span data-en>Loading the menu…</span></p>
       </div>
+      <p class="menu-note" id="menu-fallback" hidden>
+        <span data-sq>Menyja nuk u ngarkua dot. </span><span data-en>Couldn't load the menu right now. </span>
+        <a href="https://share.google/1H0qTNSMTV8mdkK0m" target="_blank" rel="noopener"><span data-sq>Shiheni në Google</span><span data-en>View it on Google</span></a>
+      </p>
+      <p class="menu-note"><span data-sq>Menyja përditësohet drejtpërdrejt nga lista jonë.</span><span data-en>Menu updated live from our listing.</span></p>
     </div>
   </section>
 
@@ -432,6 +436,46 @@
         openImg(a.getAttribute('href'), img ? img.alt : '');
       });
     });
+
+    // live menu — read straight from the Google Doc on every load (it changes often)
+    (function () {
+      var DOC_ID = '1y79HP_tc2q7ecpHZTDp0uEBjef_K2CtvcFRmB8Hmg4E';
+      var DOC_URL = 'https://docs.google.com/document/d/' + DOC_ID + '/export?format=txt';
+      var box = document.getElementById('menu-live');
+      if (!box) return;
+      function esc(s) { var d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+      function fail() { var f = document.getElementById('menu-fallback'); if (f) f.hidden = false; box.innerHTML = ''; }
+      fetch(DOC_URL + '&_=' + new Date().getTime(), { cache: 'no-store' })
+        .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+        .then(function (txt) {
+          txt = txt.replace(/^﻿/, '');
+          var sections = [], cur = null;
+          txt.split(/\r?\n/).forEach(function (raw) {
+            var line = raw.trim();
+            if (!line) return;
+            if (/^[-_*]{3,}$/.test(line)) return;                 // horizontal rule
+            if (/^source of truth/i.test(line)) return;           // editor note
+            var h = line.match(/^#{2,6}\s+(.+)$/);                // ## Section heading
+            if (h) { cur = { title: h[1].trim(), items: [] }; sections.push(cur); return; }
+            if (/^#\s+/.test(line)) return;                       // page title
+            line = line.replace(/^[-*•]\s+/, '');                 // strip list bullet
+            if (!cur) { cur = { title: '', items: [] }; sections.push(cur); }
+            cur.items.push(line);
+          });
+          sections = sections.filter(function (s) { return s.items.length; });
+          if (!sections.length) return fail();
+          var html = '<div class="menu-grid">';
+          sections.forEach(function (s) {
+            var p = s.title.split('—');
+            var en = esc(p[0].trim()), sq = esc((p[1] || p[0]).trim());
+            html += '<div class="menu-cat"><h3><span data-sq>' + sq + '</span><span data-en>' + en + '</span></h3>';
+            s.items.forEach(function (it) { html += '<div class="menu-item"><span class="name">' + esc(it) + '</span></div>'; });
+            html += '</div>';
+          });
+          box.innerHTML = html + '</div>';
+        })
+        .catch(fail);
+    })();
 
     // always show the current year in the footer
     document.getElementById('year').textContent = new Date().getFullYear();
