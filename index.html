@@ -421,7 +421,7 @@
   <!-- MENU MODAL -->
   <div class="modal" id="menu-modal" onclick="closeMenu()">
     <button type="button" class="close" aria-label="Close" onclick="closeMenu()">&times;</button>
-    <img src="assets/img/menu-board.jpeg" alt="Aloa's full menu board" onclick="event.stopPropagation()" />
+    <img id="modal-img" src="" alt="" onclick="event.stopPropagation()" />
   </div>
 
   <!-- FOOTER -->
@@ -460,11 +460,25 @@
       var play = v.play(); if (play && play.catch) play.catch(function(){});
     })();
 
-    // full-menu lightbox
+    // lightbox — used by the full menu button and every gallery photo
     var menuModal = document.getElementById('menu-modal');
-    function openMenu() { menuModal.classList.add('open'); document.body.style.overflow = 'hidden'; }
+    var modalImg = document.getElementById('modal-img');
+    function openImg(src, alt) {
+      modalImg.src = src; modalImg.alt = alt || '';
+      menuModal.classList.add('open'); document.body.style.overflow = 'hidden';
+    }
+    function openMenu() { openImg('assets/img/menu-board.jpeg', "Aloa's full menu board"); }
     function closeMenu() { menuModal.classList.remove('open'); document.body.style.overflow = ''; }
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenu(); });
+
+    // open gallery photos in the lightbox instead of a new tab
+    document.querySelectorAll('.gallery-grid a').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        var img = a.querySelector('img');
+        openImg(a.getAttribute('href'), img ? img.alt : '');
+      });
+    });
 
     // always show the current year in the footer
     document.getElementById('year').textContent = new Date().getFullYear();
